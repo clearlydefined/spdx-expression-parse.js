@@ -12,6 +12,7 @@ var exceptions = require('spdx-exceptions')
 //
 // options:
 //  - Set `relaxed` to `true` to accept invalid license or exception IDs.
+//  - Set `licenseVisitor` to a function that transforms the license identifier
 module.exports = function (tokens, options) {
   options = options || {}
   var index = 0
@@ -80,6 +81,9 @@ module.exports = function (tokens, options) {
     var t = token()
     if (t && t.type === 'IDENTIFIER') {
       next()
+      if (typeof options.licenseVisitor === 'function') {
+        t.string = options.licenseVisitor(t.string);
+      }
       if (licenses.indexOf(t.string) === -1) {
         if (options.relaxed) {
           return {noassertion: t.string}

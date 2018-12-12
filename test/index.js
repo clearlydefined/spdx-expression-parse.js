@@ -116,3 +116,27 @@ it('accepts invalid license and exception names in relaxed mode', function () {
     }
   )
 })
+
+it('uses licenseVisitor to normalize licenseIdentifiers', function () {
+  assert.deepEqual(
+    p('mit OR Apache-2.0', { licenseVisitor: function (identifier) {
+      if (identifier === 'mit') return 'MIT'
+      return identifier
+    }}),
+    {
+      left: {license: 'MIT'},
+      conjunction: 'or',
+      right: {license: 'Apache-2.0'}
+    }
+  )
+})
+ it('parses non-spdx licenses with noassertion', function () {
+  assert.deepEqual(
+    p('MIT OR Commercial', { relaxed: true }),
+    {
+      left: {license: 'MIT'},
+      conjunction: 'or',
+      right: {noassertion: 'Commercial'}
+    }
+  )
+})
