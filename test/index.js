@@ -140,3 +140,13 @@ it('uses licenseVisitor to normalize licenseIdentifiers', function () {
     }
   )
 })
+
+it('parses non-spdx exceptions with noassertion', function () {
+  assert.deepEqual(
+    p('Apache-2.0 WITH commons-clause', { relaxed: true }),
+    {
+      license: 'Apache-2.0',
+      exception: 'NOASSERTION'
+    }
+  )
+})

@@ -44,10 +44,13 @@ module.exports = function (tokens, options) {
     if (parseOperator('WITH')) {
       var t = token()
       if (t && t.type === 'IDENTIFIER') {
-        if (!options.relaxed && exceptions.indexOf(t.string) === -1) {
+        next()
+        if (exceptions.indexOf(t.string) === -1) {
+          if (options.relaxed) {
+            return 'NOASSERTION'
+          }
           throw new Error('`' + t.string + '` is not a valid exception name')
         }
-        next()
         return t.string
       }
       throw new Error('Expected exception after `WITH`')
