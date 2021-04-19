@@ -15,6 +15,7 @@
 ## Adding a license string
 * If you are adding a new license string (like in [this pull request](https://github.com/clearlydefined/spdx-expression-parse.js/pull/1), you will also need to add the license string to the [clearlydefined/spdx](https://github.com/clearlydefined/spdx) repo
 
+## Original README text
 
 This package parses [SPDX license expression](https://spdx.org/spdx-specification-21-web-version#h.jxpfx0ykyb60) strings describing license terms, like [package.json license strings](https://docs.npmjs.com/files/package.json#license), into consistently structured ECMAScript objects.  The npm command-line interface depends on this package, as do many automatic license-audit tools.
 
