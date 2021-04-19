@@ -1,6 +1,6 @@
 'use strict'
 
-var licenses = ['OTHER']
+var licenses = ['OTHER', 'NONE']
   .concat(require('spdx-license-ids'))
   .concat(require('spdx-license-ids/deprecated'))
 var exceptions = require('spdx-exceptions')
