@@ -1,3 +1,21 @@
+# spx-expression-parse.js
+
+## Notes
+* This is a fork of https://github.com/jslicense/spdx-expression-parse.js
+* This fork is used by [clearlydefined/service](https://github.com/clearlydefined/service)
+* This fork has some additional license strings that are used by ClearlyDefined
+
+## Deploying a change
+* Make the change in a pull request to this repo
+* After review, merge the pull request here
+* Go to the [ClearlyDefined Azure DevOps Pipeline Page](https://dev.azure.com/clearlydefined/ClearlyDefined/_build) (if you need access, reach out to @nellshamrell)
+* Do a new build of the service-master pipeline
+* If that build passes, do a new build of the service-prod pipeline
+
+## Adding a license string
+* If you are adding a new license string (like in [this pull request](https://github.com/clearlydefined/spdx-expression-parse.js/pull/1), you will also need to add the license string to the [clearlydefined/spdx](https://github.com/clearlydefined/spdx) repo
+
+
 This package parses [SPDX license expression](https://spdx.org/spdx-specification-21-web-version#h.jxpfx0ykyb60) strings describing license terms, like [package.json license strings](https://docs.npmjs.com/files/package.json#license), into consistently structured ECMAScript objects.  The npm command-line interface depends on this package, as do many automatic license-audit tools.
 
 In a nutshell:
