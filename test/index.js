@@ -83,3 +83,9 @@ it('parses `AND`, `OR` and `WITH` with the correct precedence', function () {
     }
   )
 })
+
+it('should parse BSD-3-Clause-Modification', function () {
+  assert.deepEqual(
+    p('BSD-3-Clause-Modification'),
+    {license: 'BSD-3-Clause-Modification'})
+})
