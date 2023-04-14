@@ -104,7 +104,7 @@ it('accepts invalid license and exception names in relaxed mode', function () {
 
   assert.deepEqual(
     p('MIT WITH unknownException', {relaxed: true}),
-    {license: 'MIT', exception: 'unknownException'}
+    {license: 'MIT', exception: 'NOASSERTION'}
   )
 
   assert.deepEqual(
@@ -149,4 +149,10 @@ it('parses non-spdx exceptions with noassertion', function () {
       exception: 'NOASSERTION'
     }
   )
+})
+
+it('should parse BSD-3-Clause-Modification', function () {
+  assert.deepEqual(
+    p('BSD-3-Clause-Modification'),
+    {license: 'BSD-3-Clause-Modification'})
 })
