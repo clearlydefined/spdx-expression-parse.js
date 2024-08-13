@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (source) {
+module.exports = function (source, options = {}) {
   var index = 0
 
   function hasMore () {
@@ -73,6 +73,16 @@ module.exports = function (source) {
     if (read('LicenseRef-')) {
       var string = expectIdstring()
       return {type: 'LICENSEREF', string: string}
+    } 
+
+    if (typeof options.licenseRefLookup === 'function') {
+      const peek = source.slice(index)
+      const match = peek.match(/[A-Za-z0-9-.]+/)
+      const mapped = match && options.licenseRefLookup(match[0])
+      if (mapped?.startsWith('LicenseRef-')) {
+        expectIdstring() //to advance the index
+        return {type: 'LICENSEREF', string: mapped.replace('LicenseRef-', '')}
+      }
     }
   }
 
