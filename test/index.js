@@ -163,12 +163,11 @@ describe('licenseRefLookup', function () {
     if (identifier === 'afpl-9.0') return 'LicenseRef-scancode-afpl-9.0'
     if (identifier === 'activestate-community') return 'LicenseRef-scancode-activestate-community'
     if (identifier === 'ac3filter') return 'LicenseRef-scancode-ac3filter'
-    return identifier
   }
 
   it('should parse single licenseRef', function () {
     assert.deepEqual(
-      p('afpl-9.0', { licenseRefLookup}),
+      p('afpl-9.0', { licenseRefLookup }),
       {license: 'LicenseRef-scancode-afpl-9.0'}
     )
   })
@@ -182,7 +181,7 @@ describe('licenseRefLookup', function () {
 
   it('should parse (licenseRef OR license)', function () {
     assert.deepEqual(
-      p('(afpl-9.0 OR Apache-2.0)', { licenseRefLookup}),
+      p('(afpl-9.0 OR Apache-2.0)', { licenseRefLookup }),
       {
         left: {license: 'LicenseRef-scancode-afpl-9.0'},
         conjunction: 'or',
@@ -204,11 +203,11 @@ describe('licenseRefLookup', function () {
 
   it('should parse license AND (licenseRef AND licenseRef)', function () {
     assert.deepEqual(
-      p('Apache-2.0 AND (afpl-9.0 AND afpl-9.0)', { licenseRefLookup}),
+      p('Apache-2.0 AND (afpl-9.0 AND afpl-9.0)', { licenseRefLookup }),
       {
         left: {license: 'Apache-2.0'},
         conjunction: 'and',
-        right:     {
+        right: {
           left: {license: 'LicenseRef-scancode-afpl-9.0'},
           conjunction: 'and',
           right: {license: 'LicenseRef-scancode-afpl-9.0'}
@@ -223,7 +222,7 @@ describe('licenseRefLookup', function () {
       {
         right: {license: 'Apache-2.0'},
         conjunction: 'and',
-        left:     {
+        left: {
           left: {license: 'LicenseRef-scancode-afpl-9.0'},
           conjunction: 'and',
           right: {license: 'LicenseRef-scancode-afpl-9.0'}
@@ -276,8 +275,7 @@ describe('licenseRefLookup', function () {
         left: {license: 'LicenseRef-scancode-afpl-9.0'},
         conjunction: 'and',
         right: {license: 'MIT'}
-      }
-    )
+    })
   })
 
   it('should parse licenseRef and licenseRef', () => {
@@ -298,7 +296,7 @@ describe('licenseRefLookup', function () {
         left: {
           left: {license: 'LicenseRef-scancode-afpl-9.0'},
           conjunction: 'and',
-          right: {license: 'LicenseRef-scancode-activestate-community'}  
+          right: {license: 'LicenseRef-scancode-activestate-community'}
         },
         conjunction: 'or',
         right: {license: 'LicenseRef-scancode-ac3filter'}
@@ -308,8 +306,19 @@ describe('licenseRefLookup', function () {
 
   it('should parse INVALID to NOASSERTION', () => {
     assert.deepEqual(
-      p('INVALID', { licenseRefLookup, relaxed: true }),
-      { noassertion: 'INVALID'}
+      p('INVALID', {licenseRefLookup, relaxed: true}),
+      {noassertion: 'INVALID'}
+    )
+  })
+
+  it('should parse LicenseRef', () => {
+    assert.deepEqual(
+      p('LicenseRef-scancode-afpl-9.0 AND MIT', { licenseRefLookup }),
+      {
+        left: {license: 'LicenseRef-scancode-afpl-9.0'},
+        conjunction: 'and',
+        right: {license: 'MIT'}
+      }
     )
   })
 })
