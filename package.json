@@ -10,8 +10,8 @@
     "scan.js"
   ],
   "dependencies": {
-    "spdx-exceptions": "^2.1.0",
-    "spdx-license-ids": "^3.0.13"
+    "spdx-exceptions": "^2.5.0",
+    "spdx-license-ids": "^3.0.21"
   },
   "devDependencies": {
     "defence-cli": "^2.0.1",
