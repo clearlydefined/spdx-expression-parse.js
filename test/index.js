@@ -84,6 +84,26 @@ it('parses `AND`, `OR` and `WITH` with the correct precedence', function () {
   )
 })
 
+it('parses Autoconf-exception-2.0', function () {
+  assert.deepEqual(
+    p('GPL-2.0-or-later WITH Autoconf-exception-2.0'),
+    {
+      license: 'GPL-2.0-or-later',
+      exception: 'Autoconf-exception-2.0'
+    }
+  )
+})
+
+it('parses Asterisk-exceptionn', function () {
+  assert.deepEqual(
+    p('GPL-2.0-or-later WITH Asterisk-exception'),
+    {
+      license: 'GPL-2.0-or-later',
+      exception: 'Asterisk-exception'
+    }
+  )
+})
+
 it('rejects invalid license and exception names by default', function () {
   assert.throws(
     function () { p('unknownLicense') },
